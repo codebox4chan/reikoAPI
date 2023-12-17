@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: yellow;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h5 {
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: orange;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: black;
+    }
+
+    #apiKey {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+  <title>API Endpoints</title>
+</head>
+<body>
+  <div class="container">
+    <h1>FREE API</h1>
+    <h3>No Need API Key</h3>
+    <h5>/api/nikke<br>/api/tts?text=hello<br>/api/random-fact<br>/api/random-law<br>/api/haxor/1/2<br>/api/geologic?earthquake=hour, day or month</h5>
+
+    <h1>FB API</h1>
+    <h5>/fbshield/avatar?token=AccessToken<br>/fb/token?username=UIDorEmail&password=YourPW<br>/share?token=AccessToken&link=PostUrl&amount=Value</h5>
+
+    <h1>API WITH KEY</h1>
+    <h3>Gen Text API<br><br>GET/api/example?apiKey=4pslpw43lgu542ey0f20x&prompt=hi<br></h3>
+    <h5>/api/ai?prompt=hi<br>/api/palm?prompt=hi<br>/api/gpt4?prompt=hi<br>/api/paraphrase?text=hi<br>/api/j2-ultra?prompt=hi</h5>
+     <h3>Gen Image API</h3>
+     <h5>/api/guru?prompt=cat20%picture</h5>
+    <h3>Anime API</h3>
+     <h5>/api/anime-fact<br>/api/anime-quote<br>/api/anime-waifu<br>/api/manga</h5>
+    
+    <h1>API Key Generator</h1>
+    <button onclick="generateApiKey()">Generate API Key</button>
+    <p id="apiKey"></p>
+  </div>
+
+  <script>
+    function generateApiKey() {
+      fetch('/api/generateApiKey')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('apiKey').innerText = `Generated API Key: ${data.apiKey}\nExpires: ${data.expires}`;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>

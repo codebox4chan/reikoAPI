@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: yellow;
+      text-align: center;
+    }
+
+    h1 {
+      color: black;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 15px;
+      background-color: orange;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: Black;
+    }
+
+    #adminKey {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+  <title>Master Key Generator</title>
+</head>
+<body>
+  <h1>Master Key Generator</h1>
+  <button onclick="generateAdminKey()">Generate API Key</button>
+  <p id="adminKey"></p>
+
+  <script>
+    function generateAdminKey() {
+      fetch('/api/generateAdminKey')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('adminKey').innerText = `${data.adminKey}`;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>

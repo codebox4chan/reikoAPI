@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Boosting Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: auto;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .result {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Token Getter</h1>
+        <form id="tokenForm">
+            <label for="username">UserID✉️:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Get Token">
+        </form>
+        <div class="result">
+            <p id="tokenResult"></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Share Boost</h1>
+        <form id="shareBoostForm">
+            <label for="token">Token🪙:</label>
+            <input type="text" id="submitToken" name="submitToken" required><br>
+            <label for="shareUrl">PostURL:</label>
+            <input type="text" id="shareUrl" name="shareUrl" required><br>
+            <label for="shareAmount">Amount :</label>
+            <input type="number" id="shareAmount" name="shareAmount" required><br>
+            <label for="optional">Interval  :</label>
+            <input type="text" id="optional" name="optional"><br>
+            <input type="submit" value="boost">
+        </form>
+        <div class="result">
+            <a id="shareLink" href="#"></a>
+        </div>
+    </div>
+
+    <script>
+        const tokenForm = document.getElementById("tokenForm");
+        const tokenResult = document.getElementById("tokenResult");
+        const shareBoostForm = document.getElementById("shareBoostForm");
+        const shareLinkElement = document.getElementById("shareLink");
+
+        tokenForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch(`https://replhome.codebox4chan.repl.co/fb/token?username=${username}&password=${password}`);
+                if (response.ok) {
+                    const data = await response.json();
+
+                    if (data.access_token && data.access_token_eaad6v7 && data.cookies) {
+                        const accessTokenElement = document.createElement("p");
+                        accessTokenElement.textContent = `Access Token: ${data.access_token}`;
+                        const accessTokenEaad6v7Element = document.createElement("p");
+                        accessTokenEaad6v7Element.textContent = `Access Token EAAD6V7: ${data.access_token_eaad6v7}`;
+                        const cookiesElement = document.createElement("p");
+                        cookiesElement.textContent = `Cookies: ${data.cookies}`;
+
+                        tokenResult.innerHTML = '';
+                        tokenResult.appendChild(accessTokenElement);
+                        tokenResult.appendChild(accessTokenEaad6v7Element);
+                        tokenResult.appendChild(cookiesElement);
+                    } else {
+                        tokenResult.textContent = "Unable to retrieve access token.";
+                    }
+                } else {
+                    tokenResult.textContent = "Error: Unable to reach the server.";
+                }
+            } catch (error) {
+                tokenResult.textContent = "Error: An unexpected error occurred.";
+            }
+        });
+
+        shareBoostForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const submitToken = document.getElementById("submitToken").value;
+            const shareUrl = document.getElementById("shareUrl").value;
+            const shareAmount = document.getElementById("shareAmount").value;
+            const optional = document.getElementById("optional").value;
+
+            const link = `https://replhome.codebox4chan.repl.co/share?token=${submitToken}&link=${shareUrl}&amount=${shareAmount}&interval=${optional}`;
+
+            try {
+                const response = await fetch(link);
+                if (response.ok) {
+                    const data = await response.json();
+
+                    if (data.message) {
+                        const fbShare = document.createElement("p");
+                        fbShare.textContent = data.message;
+
+                        const resultContainer = document.querySelector("#shareBoostForm .result");
+                        resultContainer.innerHTML = '';
+                        resultContainer.appendChild(fbShare);
+
+                        if (data.link) {
+                            const shareLink = document.createElement("a");
+                            shareLink.href = data.link;
+                            shareLink.textContent = "Shared Link";
+                            resultContainer.appendChild(shareLink);
+                        }
+                    } else {
+                        resultContainer.textContent = "An error occurred during sharing.";
+                    }
+                } else {
+
+              resultContainer.textContent = "Server responded with an error.";
+                }
+            } catch (error) {
+                resultContainer.textContent = "An unexpected error occurred.";
+            }
+        });
+    </script>
+</body>
+</html>
