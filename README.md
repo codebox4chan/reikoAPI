@@ -1,17 +1,19 @@
 CodeBox4Chan API
-[![License: GNU GPL v3](https://img.shields.io/badge/License-GNU%20GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-Overview
+
+#Overview
+
 Welcome to the CodeBox4Chan API! This open-source API is designed to seamlessly integrate with the CodeBox4Chan platform, allowing developers to access [provide a brief overview of what the API offers]. It is released under the GNU General Public License v3, ensuring its open availability and modifiability.
 
-Getting Started
+#Getting Started
 Prerequisites
 Ensure you have the following prerequisites installed:
 
 Node.js
 npm (Node Package Manager)
 [Other dependencies, if any]
-Installation
-Clone the repository: git clone https://github.com/yourusername/CodeBox4Chan-API.git
+
+#Installation
+Clone the repository: git clone https://github.com/codebox4chan/reikoAPI.git
 Navigate to the project directory: cd CodeBox4Chan-API
 Install dependencies: npm install
 Usage
