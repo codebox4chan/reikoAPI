@@ -21,7 +21,7 @@ Ensure you have the following installed:
    ```
 2. Navigate to the project directory:
    ```bash
-   cd CodeBox4Chan-API
+   cd reikoAPI
    ```
 3. Install dependencies:
    ```bash
