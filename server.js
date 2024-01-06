@@ -94,5 +94,3 @@ const port = Math.floor(Math.random() * (3000 - 1024) + 1024);
 app.listen(port, () => {
   console.log(`API is running on port ${port}`);
 });
-
-module.exports = app;
