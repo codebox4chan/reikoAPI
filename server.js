@@ -1,4 +1,5 @@
-import { createRequire } from 'module' const require = createRequire(import.meta.url);
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 const express = require('express');
 const bodyParser = require('body-parser');
