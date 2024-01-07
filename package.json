@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node -r esm server.js"
+    "start": "node server.js"
   },
   "babel": {
     "presets": [
