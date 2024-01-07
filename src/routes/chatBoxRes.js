@@ -271,7 +271,7 @@ router.get("/eden", async (req, res) => {
 });
 
 const Bard = require('../services/bardchat');
-const fetch = require'node-fetch'; // Import fetch module
+const fetch = require('node-fetch'); // Import fetch module
 
 router.get('/bard', async (req, res) => {
   try {
