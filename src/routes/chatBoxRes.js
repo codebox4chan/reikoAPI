@@ -270,6 +270,21 @@ router.get("/eden", async (req, res) => {
   }
 });
 
+router.get('/bard', async (req, res) => {
+  const question = req.query.prompt;
+
+  if (!question) {
+    return res.status(400).json({ error: 'Please provide a question.' });
+  }
+
+  try {
+    const reply = await axios('not');
+    res.json({ reply });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while processing the question.' });
+  }
+});
+
 module.exports = router;
 
 
