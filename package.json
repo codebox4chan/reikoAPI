@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "exports": {
+    ".": {
+      "require": "./server.js",
+      "import": "./server.js"
+    }
+  },
   "scripts": {
     "start": "node server.js"
   },
