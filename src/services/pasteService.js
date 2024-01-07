@@ -5,24 +5,46 @@ const { v4: uuidv4 } = require('uuid');
 class PastebinService {
   constructor() {
     this.pasteDirectory = path.join(__dirname, '..', 'paste');
-    fs.mkdirSync(this.pasteDirectory, { recursive: true });
+    this.createDirectoryIfNotExists();
 
     this.pastes = [];
   }
 
+  createDirectoryIfNotExists() {
+    try {
+      fs.mkdirSync(this.pasteDirectory, { recursive: true });
+    } catch (error) {
+      console.error(`Error creating paste directory: ${error.message}`);
+      // Handle the error, perhaps by returning an error status or throwing an exception
+    }
+  }
+
   createPaste(content, title) {
     const id = uuidv4();
-    const paste = {
+    const paste = this.buildPasteObject(id, title);
+    const filePath = path.join(this.pasteDirectory, `${id}.txt`);
+
+    this.savePasteToFile(filePath, content);
+    this.pastes.push(paste);
+
+    return paste;
+  }
+
+  buildPasteObject(id, title) {
+    return {
       id,
       title,
       created_at: new Date(),
     };
+  }
 
-    const filePath = path.join(this.pasteDirectory, `${id}.txt`);
-    fs.writeFileSync(filePath, content);
-
-    this.pastes.push(paste);
-    return paste;
+  savePasteToFile(filePath, content) {
+    try {
+      fs.writeFileSync(filePath, content);
+    } catch (error) {
+      console.error(`Error writing paste file: ${error.message}`);
+      // Handle the error, perhaps by returning an error status or throwing an exception
+    }
   }
 
   getPaste(id) {
