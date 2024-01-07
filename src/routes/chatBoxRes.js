@@ -271,7 +271,8 @@ router.get("/eden", async (req, res) => {
 });
 
 router.get('/bard', async (req, res) => {
-  const question = req.query.prompt;
+  const prompt = req.query.prompt;
+  const cookie = req.query.cookie;
 
   if (!question) {
     return res.status(400).json({ error: 'Please provide a question.' });
