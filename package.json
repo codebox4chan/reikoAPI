@@ -22,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "hercai": "^12.0.0",
     "@consumet/extensions": "^1.5.2",
     "@google-ai/generativelanguage": "^1.1.0",
     "@google/generative-ai": "^0.1.2",
