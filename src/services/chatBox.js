@@ -15,7 +15,7 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 
 const hercai = async (question) => {
   try {
-    const response = await herc.question({ model: 'v3-beta', content: question });
+    const response = await herc.question({ model: 'v3-32k', content: question });
     return response.reply;
   } catch (error) {
     console.error('Error while making the Hercai API request:', error);
