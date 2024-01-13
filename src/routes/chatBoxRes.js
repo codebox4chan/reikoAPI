@@ -272,15 +272,14 @@ router.get("/eden", async (req, res) => {
 
 router.get('/bard', async (req, res) => {
   const prompt = req.query.prompt;
-  const cookie = req.query.cookie;
 
   if (!question) {
     return res.status(400).json({ error: 'Please provide a question.' });
   }
 
   try {
-    const reply = await axios(`https://bard-ts.vercel.app/bard?prompt=${prompt}`);
-    res.json({ reply: response.data.message });
+    const reply = await axios(`https://api-samir.onrender.com/api/bard?question=${prompt}`);
+    res.json({ reply: response.data });
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while processing the question.' });
   }
